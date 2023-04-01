@@ -100,6 +100,7 @@ function SignUp() {
                     {isLoading === true ? <Spinner style={{ color: 'white', padding: "7px" }} /> : "Create Account"}
 
                 </Button>
+                <p >Already have an account? <a href="login" style={{ color: '#006064', fontWeight: 'bold', cursor: 'pointer' }}>Login</a></p>
             </Form>
         </div>
     )

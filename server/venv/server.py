@@ -64,6 +64,27 @@ def get_data():
 
     return jsonify([{"homeName": item[0], "homePhoneNo": item[1],"homeNoOfChildren":item[2], "homeNoOfFemales": item[3], "homeNoOfMales": item[4], "homeAvgAge":item[5], "idhomedetails":item[6]} for item in rows ])
 
+@app.route("/login", methods = ['POST'])
+def login():
+    userPassword = request.json['userPassword']
+    userEmail = request.json['userEmail']
+    cursor = mydb.cursor()
+    
+    user = [userEmail, userPassword]
+
+    cursor.execute("SELECT parentEmail, parentPassword FROM parentProfile WHERE parentEmail = %s AND parentPassword = %s", (userEmail, userPassword))
+    response = jsonify(message= "server is running")
+    response.headers.add("Access-Control-Allow-Origin", "*")
+
+    result = cursor.fetchall()
+    if len(result) > 0:
+        return jsonify({"status": "sucess"})
+    else:
+        return jsonify({"message": "No user found", "userCombination": user}),404
+    
+
+    
+
 if __name__ == '__main__':
     app.run(debug=True)
 

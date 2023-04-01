@@ -108,7 +108,7 @@ function MainPage() {
             <Form className="d-flex" style={{ width: "100%", display: "flex", justifyContent: "center", padding: 20 }} onSubmit={handleSearchSubmit} >
                 <Form.Control
                     type="search"
-                    placeholder="Enter location"
+                    placeholder="Enter location eg ` Nairobi`"
                     className="me-2"
                     value={query}
                     onChange={handleInputChange}
