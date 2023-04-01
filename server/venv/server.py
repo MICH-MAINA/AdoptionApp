@@ -28,31 +28,41 @@ def signup():
     mydb.commit()
     cursor.close()
     mydb.close()
+    
 
     return jsonify({'status': 'success'})
 
-@app.route('/dashboard', methods=['GET'])
+# get one item
+@app.route('/dashboard/item/<int:home_id>')
+def getOneHome(home_id):
+    
+    cursor = mydb.cursor()
+
+    cursor.execute("SELECT homeName, homePhoneNo, homeAddress, homeNoOfChildren, homeNoOfFemales, homeNoOfMales, homeAvgAge FROM homedetails where idhomedetails = %s", (home_id,))
+    response = jsonify(message= "server is running")
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    result = cursor.fetchall()
+
+    if result is None:
+        return jsonify({'error': 'item not found'}), 404
+    # cursor.close()
+    # mydb.close()
+    
+    return jsonify([{"homeName": item[0], "homePhoneNo": item[1], "homeAddress":item[2], "homeNoOfChildren":item[3], "homeNoOfFemales": item[4], "homeNoOfMales": item[5], "homeAvgAge":item[6] } for item in result])
+
+@app.route('/dashboard/search')
 def get_data():
     query = request.args.get('q')
     cursor = mydb.cursor()
 
-    cursor.execute("SELECT * FROM homedetails")
+    cursor.execute("SELECT homename, homePhoneNo, homeNoOfChildren, homeNoOfFemales, homeNoOfMales, homeAvgAge, idhomedetails FROM homedetails WHERE homeAddress LIKE %s",  ('%' + query + '%',) )
     response = jsonify(message= "server is running")
     response.headers.add("Access-Control-Allow-Origin", "*")
     rows = cursor.fetchall()
-    cursor.close()
-    mydb.close()
-    data = []
+    
+    
 
-    for row in rows:
-        data.append({
-            'idhomedetails': row[0],
-            'homeName' :row[1]
-        })
-
-    if query:
-        data = [item for item in data if query.lower() in item['homeName'].lower()]
-    return jsonify(data)
+    return jsonify([{"homeName": item[0], "homePhoneNo": item[1],"homeNoOfChildren":item[2], "homeNoOfFemales": item[3], "homeNoOfMales": item[4], "homeAvgAge":item[5], "idhomedetails":item[6]} for item in rows ])
 
 if __name__ == '__main__':
     app.run(debug=True)

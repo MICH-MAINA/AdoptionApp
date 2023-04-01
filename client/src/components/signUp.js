@@ -46,7 +46,7 @@ function SignUp() {
     }
 
     return (
-        <div style={{ backgroundColor: '#F5F5F5', display: 'flex', justifyContent: 'center', width: '100%', marginTop: "10%" }}>
+        <div style={{ backgroundColor: '#F5F5F5', display: 'flex', justifyContent: 'center', width: '100%', marginTop: 100 }}>
             <Form style={{ backgroundColor: '#ffffff', minWidth: 300, textAlign: "left", padding: 20, borderRadius: 10, boxShadow: "10px 10px 5px 0 rgba(0,0,0,0.75)" }}>
             {!notSubmitted === false ?
                         <Alert variant="danger" style={{ marginTop: 10, marginBottom: 0 }}>
