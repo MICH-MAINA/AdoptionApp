@@ -26,8 +26,8 @@ def signup():
     cursor.execute(insert_statement, values)
 
     mydb.commit()
-    cursor.close()
-    mydb.close()
+    # cursor.close()
+    # mydb.close()
     
 
     return jsonify({'status': 'success'})

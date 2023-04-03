@@ -72,7 +72,7 @@ function Login() {
 
 
 
-                <p style={{ paddingTop: 20 }}>Need an account<span style={{ color: 'blue', fontWeight: 'bold' }}> Sign Up</span></p>
+                <p style={{ paddingTop: 20 }}>Need an account<span style={{ color: 'blue', fontWeight: 'bold' }}> <a href="/" style={{ color: '#006064', fontWeight: 'bold', cursor: 'pointer' }}>Login</a></span></p>
             </Form>
         </div>
     )

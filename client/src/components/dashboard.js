@@ -28,10 +28,11 @@ export default Dashboard;
 function Navigation() {
     return (
         <div className='nav' style={{ display: "block", color: "white", textAlign: 'left', paddingTop: 20 }}>
-            <div>logo</div>
+            <div style={{fontFamily:"Climate Crisis", fontStyle:"italic", fontSize:30, color:"orange"}}>FindaHome</div>
             <div>Home</div>
             <div>Account</div>
             <div>Contact us</div>
+            <div ><a href='/login'style={{fontWeight:"bold", textDecoration:"none", color:"#ffffff"}}>LogOut</a></div>
         </div>
     )
 }
@@ -48,7 +49,8 @@ function MainPage() {
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false);
     
-
+    const [queryError, setQueryError] = useState(false)
+    
 
     const handleInputChange = (event) => {
         setQuery(event.target.value)
@@ -56,21 +58,41 @@ function MainPage() {
 
     }
 
+    
+
     const handleSearchSubmit = async (event) => {
         event.preventDefault();
+
+        
         const response = await axios.get(`http://localhost:5000/dashboard/search?q=${query}`).then(response => {
             const arr = response.data
             console.log(query)
-            if (arr.length > 0 ){
+
+            if(query.trim() === ''){
+                setQueryError(true)
+                setData([])
+            }else if(arr.length === 0){
+                setData([])
+                setError(true)
+                setQueryError(false)
+            }else{
                 setData(response.data)
                 setError(false)
                 console.log(data)
-            }else{
-                console.log("no item found")
-                setData([])
-                setError(true)
-                
+                setQueryError(false)
             }
+
+            // if (arr.length > 0 ){
+            //     setData(response.data)
+            //     setError(false)
+            //     console.log(data)
+                
+            // }else{
+            //     console.log("no item found")
+            //     setData([])
+            //     setError(true)
+                
+            // }
             
             
             
@@ -117,7 +139,10 @@ function MainPage() {
                 />
                 <Button style={{ borderRadius: 20, border: "1px solid black", backgroundColor: "#ffffff", color: "black" }}  type="submit">Search</Button>
             </Form>
-            
+            {queryError === true? <p style={{fontFamily:'Alkatra'}}>Please enter the location</p>: "" }
+
+
+
             <div style={{ margin: 10 }}>
                 <div style={{ display: "flex", justifyContent: "space-around", padding: 10 }}>
                     <p style={{ fontWeight: 'bolder' }}>Home Name</p>

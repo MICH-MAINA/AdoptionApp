@@ -46,7 +46,7 @@ function SignUp() {
     }
 
     return (
-        <div style={{ backgroundColor: '#F5F5F5', display: 'flex', justifyContent: 'center', width: '100%', marginTop: 100 }}>
+        <div style={{ backgroundColor: '#F5F5F5', display: 'flex', justifyContent: 'center', width: '100%', marginTop: 70 }}>
             <Form style={{ backgroundColor: '#ffffff', minWidth: 300, textAlign: "left", padding: 20, borderRadius: 10, boxShadow: "10px 10px 5px 0 rgba(0,0,0,0.75)" }}>
             {!notSubmitted === false ?
                         <Alert variant="danger" style={{ marginTop: 10, marginBottom: 0 }}>
@@ -58,7 +58,7 @@ function SignUp() {
                     }
                    
 
-            <p style={{ textAlign: "center", width: "100%", fontFamily: "Crisis one", fontWeight: "bold" }}>SIGN UP</p>
+            <p style={{ textAlign: "center", width: "100%", fontFamily: "Crisis one", fontWeight: "bold" }}>PARENT REGISTRATION</p>
                 <Form.Group >
                     <div className="row" style={{ marginBottom: 20 }} >
                         <div className="col-sm"><Form.Control type="text" name='userFname' value={formData.userFname} placeholder="First Name" onChange={handleChange}/></div>
@@ -94,7 +94,7 @@ function SignUp() {
 
                 <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
                     
-                    <Form.Control type="password" placeholder="Confirm password" name='userPassword' value={formData.userPassword} onChange={handleChange} />
+                    <Form.Control type="password" placeholder="Confirm password" name='userPassword'  onChange={handleChange} />
                 </Form.Group>
                 <Button variant="primary" onClick={handleSubmit} type="submit" style={{ width: "100%", fontWeight: "bold", backgroundColor: "#1A237E" }}>
                     {isLoading === true ? <Spinner style={{ color: 'white', padding: "7px" }} /> : "Create Account"}
